@@ -1,4 +1,4 @@
-package at.stefl.commons.test;
+package at.stefl.commons;
 
 import java.io.BufferedInputStream;
 import java.io.File;

@@ -1,4 +1,4 @@
-package at.stefl.svm.test;
+package at.stefl.svm;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -1,4 +1,4 @@
-package at.stefl.commons.test;
+package at.stefl.commons;
 
 import java.io.InputStream;
 
@@ -6,22 +6,19 @@ import org.junit.Test;
 
 import at.stefl.commons.io.FluidInputStreamReader;
 import at.stefl.commons.lwxml.LWXMLEvent;
-import at.stefl.commons.lwxml.reader.LWXMLPushbackReader;
+import at.stefl.commons.lwxml.reader.LWXMLFlatReader;
 import at.stefl.commons.lwxml.reader.LWXMLReader;
 import at.stefl.commons.lwxml.reader.LWXMLStreamReader;
 
-public class LWXMLPushbackReaderTest {
+public class LWXMLFlatReaderTest {
 
     @Test
     public void should_testName() throws Exception {
-        final InputStream inputStream = LWXMLPushbackReaderTest.class.getResourceAsStream("test.xml");
+        final InputStream inputStream = LWXMLFlatReaderTest.class.getResourceAsStream("test.xml");
         final LWXMLReader lwxmlReader = new LWXMLStreamReader(new FluidInputStreamReader(inputStream));
-        final LWXMLPushbackReader in = new LWXMLPushbackReader(lwxmlReader);
+        final LWXMLFlatReader in = new LWXMLFlatReader(lwxmlReader);
 
-        System.out.println(in.readEvent());
-
-        in.unreadEvent(LWXMLEvent.ATTRIBUTE_VALUE, "value");
-        in.unreadEvent(LWXMLEvent.ATTRIBUTE_NAME, "name");
+        lwxmlReader.readEvent();
 
         while (true) {
             final LWXMLEvent event = in.readEvent();
@@ -31,8 +28,9 @@ public class LWXMLPushbackReaderTest {
 
             System.out.println(event);
             if (event.hasValue()) {
-                System.out.println(in.readValue());
+                System.out.println("value: " + in.readValue());
             }
+            System.out.println();
         }
 
         in.close();
